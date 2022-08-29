@@ -40,14 +40,22 @@ function game(){
         let userPlay = prompt("What do you choose? ");
         let compPlay = getComputerChoice();
         let result = playRound(userPlay, compPlay);
-        console.log('result');
 
-        if(result.startsWith('You Win!')){
+        if(result.startsWith('You win') === true){
             playerPunct++;
-        } else if (result.startsWith('You lose')){
+        } else if (result.startsWith('You lose') === true){
             compPunct++;
         } 
         console.log(result);
+    }
+
+    if (playerPunct < compPunct){
+        console.log('You lose. I\'m sorry');
+    } else if (compPunct < playerPunct){
+        console.log('Congratulations! You win!');
+    }
+    else{
+        console.log('It is a tie.')
     }
 }
 
