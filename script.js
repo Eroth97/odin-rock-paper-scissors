@@ -3,14 +3,14 @@ function getComputerChoice(){
     let randomNumber = Math.random();
     randomNumber *= 3;
     randomNumber = Math.floor(randomNumber);
-    return plays[randomNumber];
+    return PLAYS[randomNumber];
 }
 
-function rpsRound(playerSelection, computerSelection){
+function playRound(playerSelection, computerSelection){
     let playerSelectionL = playerSelection.toLowerCase().trim();
     let computerSelectionL = computerSelection.toLowerCase().trim();
     if (playerSelectionL === computerSelectionL){
-        console.log("It's a tie!");
+        return "It's a tie!";
     }
     else if (playerSelectionL === 'rock' && computerSelectionL === 'paper'){
         return 'You lose! Paper beats Rock';
@@ -31,3 +31,24 @@ function rpsRound(playerSelection, computerSelection){
          return 'You win! Scissors beats paper';
     }
 }
+
+function game(){
+    let playerPunct = 0;
+    let compPunct = 0;
+
+    for(let i = 0; i < 5; i++){
+        let userPlay = prompt("What do you choose? ");
+        let compPlay = getComputerChoice();
+        let result = playRound(userPlay, compPlay);
+        console.log('result');
+
+        if(result.startsWith('You Win!')){
+            playerPunct++;
+        } else if (result.startsWith('You lose')){
+            compPunct++;
+        } 
+        console.log(result);
+    }
+}
+
+game();
