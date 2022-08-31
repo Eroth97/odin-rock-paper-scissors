@@ -1,0 +1,9 @@
+.title, .play-space, .footer{
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    list-style: none;
+    display: flex;
+}
