@@ -58,3 +58,25 @@ function game(){
         console.log('It is a tie.')
     }
 }
+
+const playSpace = document.querySelector('.play-space');
+
+const div = document.createElement('div');
+div.textContent = 'Press a button to choose your attack';
+playSpace.insertAdjacentElement('afterbegin', div);
+
+const rockButton  = document.getElementById('rock');
+rockButton.addEventListener('click', () => {
+    div.textContent = 'Rock';
+})
+
+const scissorsButton  = document.getElementById('scissors');
+scissorsButton.addEventListener('click', () => {
+    div.textContent = 'Scissors';
+})
+
+const paperButton  = document.getElementById('paper');
+paperButton.addEventListener('click', () => {
+    div.textContent = 'Paper';
+})
+
