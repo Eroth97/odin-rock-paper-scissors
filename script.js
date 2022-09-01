@@ -1,43 +1,135 @@
+// Create the scores
+let playerPunct = 0;
+let compPunct = 0;
+
+// Create the divs that contain the whole place where we work, 
+// the scores holder and the results holder.
+const playSpace = document.querySelector('.play-space');
+
+const div = document.createElement('div');
+div.textContent = 'Press a button to choose your attack';
+playSpace.insertAdjacentElement('afterbegin', div);
+
+const scores = document.createElement('div');
+playSpace.insertAdjacentElement('afterbegin', scores);
+
+const playerScore  = document.createElement('div');
+playerScore.style.margin = '10px';
+playerScore.textContent = 'Your score is: 0';
+scores.appendChild(playerScore);
+
+const compScore = document.createElement('div');
+compScore.style.margin = '10px';
+compScore.textContent = 'The computer score is: 0';
+scores.appendChild(compScore);
+
+
+//Add events listeners.
+const rockButton  = document.getElementById('rock');
+rockButton.addEventListener('click', () => {
+    let compPlay = getComputerChoice();
+    div.textContent = playRound('rock', compPlay);
+})
+
+const scissorsButton  = document.getElementById('scissors');
+scissorsButton.addEventListener('click', () => {
+    let compPlay = getComputerChoice();
+    div.textContent = playRound('scissors', compPlay);
+})
+
+const paperButton  = document.getElementById('paper');
+paperButton.addEventListener('click', () => {
+    let compPlay = getComputerChoice();
+    div.textContent = playRound('paper', compPlay);
+})
+
+
+
+
+
 function getComputerChoice(){
-    const PLAYS = ["Rock", "Scissors", "Paper"];
+    const PLAYS = ['rock', 'scissors', 'paper'];
     let randomNumber = Math.random();
     randomNumber *= 3;
     randomNumber = Math.floor(randomNumber);
     return PLAYS[randomNumber];
 }
 
+//This function plays a round, updates scores, changes the DOM 
+//of our scores divs, returns the result and returns a result!
+//You must simplify it!
 function playRound(playerSelection, computerSelection){
-    let playerSelectionL = playerSelection.toLowerCase().trim();
-    let computerSelectionL = computerSelection.toLowerCase().trim();
-    if (playerSelectionL === computerSelectionL){
-        return "It's a tie!";
+    if (playerSelection === computerSelection){
+        return 'It\'s a tie!';
     }
-    else if (playerSelectionL === 'rock' && computerSelectionL === 'paper'){
+    else if (playerSelection === 'rock' && computerSelection === 'paper'){
+        compPunct++;
+        compScore.textContent = 'The computer score is: ' + compPunct;
+        deactivateButtons();
         return 'You lose! Paper beats Rock';
     }
-    else if (playerSelectionL === 'rock' && computerSelectionL === 'scissors'){
+    else if (playerSelection === 'rock' && computerSelection === 'scissors'){
+        playerPunct++;
+        playerScore.textContent = 'Your score is: ' + playerPunct;
+        deactivateButtons();
         return 'You win! Rock beats scissors';
     }    
-    else if (playerSelectionL === 'paper' && computerSelectionL === 'rock'){
+    else if (playerSelection === 'paper' && computerSelection === 'rock'){
+        playerPunct++;
+        playerScore.textContent = 'Your score is: ' + playerPunct;
+        deactivateButtons();
         return 'You win! Paper beats rock';
     }
-    else if (playerSelectionL === 'paper' && computerSelectionL === 'scissors'){
+    else if (playerSelection === 'paper' && computerSelection === 'scissors'){
+        compPunct++;
+        compScore.textContent = 'The computer score is: ' + compPunct;
+        deactivateButtons();
         return 'You lose! Scissors beats Paper'; 
     }
-    else if (playerSelectionL === 'scissors' && computerSelectionL === 'rock'){
+    else if (playerSelection === 'scissors' && computerSelection === 'rock'){
+        compPunct++;
+        compScore.textContent = 'The computer score is: ' + compPunct;
+        deactivateButtons();
         return 'You lose! Rock beats Scissors';
     }
-    else if (playerSelectionL === 'scissors' && computerSelectionL === 'paper'){
+    else if (playerSelection === 'scissors' && computerSelection === 'paper'){
+         playerPunct++;
+         playerScore.textContent = 'Your score is: ' + playerPunct;
+         deactivateButtons();
          return 'You win! Scissors beats paper';
     }
 }
 
-function game(){
+//This function creates a new DOM element with the final result
+//and deactivate the buttons.
+function deactivateButtons(){
+    if (playerPunct === 5){
+        const result = document.createElement('div');
+        result.textContent = 'YOU ARE THE WINNER 🎈🎈';
+        playSpace.appendChild(result);
+        
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(element => {
+            element.disabled = true;
+        });
+    } else if (compPunct === 5){
+        const result = document.createElement('div');
+        result.textContent = 'You have lost 😥😥';
+        playSpace.appendChild(result);
+
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(element => {
+            element.disabled = true;
+        });
+    }
+}
+
+//This functions has only nostalgic value.
+function game(userPlay){
     let playerPunct = 0;
     let compPunct = 0;
 
     for(let i = 0; i < 5; i++){
-        let userPlay = prompt("What do you choose? ");
         let compPlay = getComputerChoice();
         let result = playRound(userPlay, compPlay);
 
@@ -58,25 +150,4 @@ function game(){
         console.log('It is a tie.')
     }
 }
-
-const playSpace = document.querySelector('.play-space');
-
-const div = document.createElement('div');
-div.textContent = 'Press a button to choose your attack';
-playSpace.insertAdjacentElement('afterbegin', div);
-
-const rockButton  = document.getElementById('rock');
-rockButton.addEventListener('click', () => {
-    div.textContent = 'Rock';
-})
-
-const scissorsButton  = document.getElementById('scissors');
-scissorsButton.addEventListener('click', () => {
-    div.textContent = 'Scissors';
-})
-
-const paperButton  = document.getElementById('paper');
-paperButton.addEventListener('click', () => {
-    div.textContent = 'Paper';
-})
 
