@@ -20,7 +20,7 @@ scores.appendChild(playerScore);
 
 const compScore = document.createElement('div');
 compScore.style.margin = '10px';
-compScore.textContent = 'The computer score is: 0';
+compScore.textContent = 'Computer score is: 0';
 scores.appendChild(compScore);
 
 
@@ -46,7 +46,6 @@ paperButton.addEventListener('click', () => {
 
 
 
-
 function getComputerChoice(){
     const PLAYS = ['rock', 'scissors', 'paper'];
     let randomNumber = Math.random();
@@ -64,7 +63,7 @@ function playRound(playerSelection, computerSelection){
     }
     else if (playerSelection === 'rock' && computerSelection === 'paper'){
         compPunct++;
-        compScore.textContent = 'The computer score is: ' + compPunct;
+        compScore.textContent = 'Computer score is: ' + compPunct;
         deactivateButtons();
         return 'You lose! Paper beats Rock';
     }
@@ -82,13 +81,13 @@ function playRound(playerSelection, computerSelection){
     }
     else if (playerSelection === 'paper' && computerSelection === 'scissors'){
         compPunct++;
-        compScore.textContent = 'The computer score is: ' + compPunct;
+        compScore.textContent = 'Computer score is: ' + compPunct;
         deactivateButtons();
         return 'You lose! Scissors beats Paper'; 
     }
     else if (playerSelection === 'scissors' && computerSelection === 'rock'){
         compPunct++;
-        compScore.textContent = 'The computer score is: ' + compPunct;
+        compScore.textContent = 'Computer score is: ' + compPunct;
         deactivateButtons();
         return 'You lose! Rock beats Scissors';
     }
@@ -112,6 +111,8 @@ function deactivateButtons(){
         buttons.forEach(element => {
             element.disabled = true;
         });
+
+        tryAgain();
     } else if (compPunct === 5){
         const result = document.createElement('div');
         result.textContent = 'You have lost 😥😥';
@@ -121,7 +122,20 @@ function deactivateButtons(){
         buttons.forEach(element => {
             element.disabled = true;
         });
+        tryAgain();
     }
+}
+
+//This function creates the try again button and its functionality.
+function tryAgain(){
+    const rechargeButton = document.createElement('button');
+    rechargeButton.textContent = 'Try Again';
+    playSpace.appendChild(rechargeButton);
+
+    rechargeButton.addEventListener('click', () =>{
+    window.location.reload();   
+    })
+
 }
 
 //This functions has only nostalgic value.
