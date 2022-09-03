@@ -156,7 +156,8 @@ function deactivateButtons(){
 function tryAgain(){
     const rechargeButton = document.createElement('button');
     rechargeButton.classList.add('rt-button');
-    rechargeButton.textContent = 'Try Again';
+    rechargeButton.style.marginTop = '4px';
+    rechargeButton.textContent = 'Play Again';
     endResult.appendChild(rechargeButton);
 
     rechargeButton.addEventListener('click', () =>{
