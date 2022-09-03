@@ -38,6 +38,19 @@ footer{
     align-items: center;
 }
 
+.lefty-footer-part{
+    flex-direction: column;
+}
+
+.lefty-footer-part p{
+    margin: 4px;
+}
+
+a{
+    color: #a7bcb9;
+    text-decoration: none;
+}
+
 .px-32{
     height: 32px;
     width: 32px;
