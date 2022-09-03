@@ -25,24 +25,37 @@ compScore.style.margin = '10px';
 compScore.textContent = 'Computer score is: 0';
 scores.appendChild(compScore);
 
+const results = document.createElement('div');
+results.style.flexDirection = 'column';
+playSpace.appendChild(results);
+
+const endResult = document.createElement('div');
+endResult.style.marginBottom = '10px';
+endResult.style.flexDirection = 'column';
+endResult.style.gap = '4px';
+
+
 
 //Add events listeners.
 const rockButton  = document.getElementById('rock');
 rockButton.addEventListener('click', () => {
     let compPlay = getComputerChoice();
-    div.textContent = playRound('rock', compPlay);
+    let result = playRound('rock', compPlay);
+    addResults(result);
 })
 
 const scissorsButton  = document.getElementById('scissors');
 scissorsButton.addEventListener('click', () => {
     let compPlay = getComputerChoice();
-    div.textContent = playRound('scissors', compPlay);
+    let result = playRound('scissors', compPlay);
+    addResults(result);
 })
 
 const paperButton  = document.getElementById('paper');
 paperButton.addEventListener('click', () => {
     let compPlay = getComputerChoice();
-    div.textContent = playRound('paper', compPlay);
+    let result = playRound('paper', compPlay);
+    addResults(result);
 })
 
 
@@ -56,85 +69,93 @@ function getComputerChoice(){
     return PLAYS[randomNumber];
 }
 
-//This function plays a round, updates scores, changes the DOM 
-//of our scores divs, returns the result and returns a result!
-//You must simplify it!
+//This function plays a round and return the result.
 function playRound(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
         return 'It\'s a tie!';
     }
     else if (playerSelection === 'rock' && computerSelection === 'paper'){
-        compPunct++;
-        compScore.textContent = 'Computer score is: ' + compPunct;
-        deactivateButtons();
+        lose();
+        lookScores();
         return 'You lose! Paper beats Rock';
     }
     else if (playerSelection === 'rock' && computerSelection === 'scissors'){
-        playerPunct++;
-        playerScore.textContent = 'Your score is: ' + playerPunct;
-        deactivateButtons();
+        win();
+        lookScores();
         return 'You win! Rock beats scissors';
     }    
     else if (playerSelection === 'paper' && computerSelection === 'rock'){
-        playerPunct++;
-        playerScore.textContent = 'Your score is: ' + playerPunct;
-        deactivateButtons();
+        win();
+        lookScores();
         return 'You win! Paper beats rock';
     }
     else if (playerSelection === 'paper' && computerSelection === 'scissors'){
-        compPunct++;
-        compScore.textContent = 'Computer score is: ' + compPunct;
-        deactivateButtons();
+        lose();
+        lookScores();
         return 'You lose! Scissors beats Paper'; 
     }
     else if (playerSelection === 'scissors' && computerSelection === 'rock'){
-        compPunct++;
-        compScore.textContent = 'Computer score is: ' + compPunct;
-        deactivateButtons();
+        lose();
+        lookScores();
         return 'You lose! Rock beats Scissors';
     }
     else if (playerSelection === 'scissors' && computerSelection === 'paper'){
-         playerPunct++;
-         playerScore.textContent = 'Your score is: ' + playerPunct;
-         deactivateButtons();
+         win();
+         lookScores();
          return 'You win! Scissors beats paper';
     }
 }
 
-//This function creates a new DOM element with the final result
-//and deactivate the buttons.
-function deactivateButtons(){
+//This functions update scores and change the DOM when you lose or win.
+function lose(){
+    compPunct++;
+    compScore.textContent = 'Computer score is: ' + compPunct;
+}
+
+function win(){
+    playerPunct++;
+    playerScore.textContent = 'Your score is: ' + playerPunct;    
+}
+
+//This function adds the results to the DOM.
+function addResults(result){
+    let resultP = document.createElement('p');
+    resultP.style.margin = '4px';
+    resultP.textContent = result;
+    results.appendChild(resultP);
+}
+
+
+//This function changes DOM with the final result.
+function lookScores(){
     if (playerPunct === 5){
-        const result = document.createElement('div');
-        result.style.marginBottom = '10px';
-        result.textContent = 'YOU ARE THE WINNER 🎈🎈';
-        playSpace.appendChild(result);
-        
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(element => {
-            element.disabled = true;
-        });
+        endResult.textContent = 'YOU ARE THE WINNER 🎈🎈';
+        playSpace.insertAdjacentElement('afterbegin', endResult);
 
-        tryAgain();
+        deactivateButtons();
     } else if (compPunct === 5){
-        const result = document.createElement('div');
-        result.style.marginBottom = '10px';
-        result.textContent = 'You have lost 😥😥';
-        playSpace.appendChild(result);
+        endResult.textContent = 'You have lost 😥😥';
+        playSpace.insertAdjacentElement('afterbegin', endResult);
 
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(element => {
-            element.disabled = true;
-        });
-        tryAgain();
+        deactivateButtons();
     }
+}
+
+//This function deactivate the buttons.
+function deactivateButtons(){
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(element => {
+        element.disabled = true;
+    });
+
+    tryAgain();
 }
 
 //This function creates the try again button and its functionality.
 function tryAgain(){
     const rechargeButton = document.createElement('button');
     rechargeButton.textContent = 'Try Again';
-    playSpace.appendChild(rechargeButton);
+    endResult.appendChild(rechargeButton);
 
     rechargeButton.addEventListener('click', () =>{
     window.location.reload();   
