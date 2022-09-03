@@ -4,7 +4,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background: #bbe9db;
+    background: #5dacbd;
 }
 
 div{
@@ -23,4 +23,22 @@ div{
     list-style: none;
     display: flex;
     padding-left: 0;
+}
+
+.title, footer{
+    background-color: #24527a;
+    color: #e0ebeb;
+}
+
+footer{
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.px-32{
+    height: 32px;
+    width: 32px;
 }
