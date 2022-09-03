@@ -11,6 +11,8 @@ div.textContent = 'Press a button to choose your attack';
 playSpace.insertAdjacentElement('afterbegin', div);
 
 const scores = document.createElement('div');
+scores.style.gap = '10px';
+scores.style.marginBottom = '10px';
 playSpace.insertAdjacentElement('afterbegin', scores);
 
 const playerScore  = document.createElement('div');
@@ -104,6 +106,7 @@ function playRound(playerSelection, computerSelection){
 function deactivateButtons(){
     if (playerPunct === 5){
         const result = document.createElement('div');
+        result.style.marginBottom = '10px';
         result.textContent = 'YOU ARE THE WINNER 🎈🎈';
         playSpace.appendChild(result);
         
@@ -115,6 +118,7 @@ function deactivateButtons(){
         tryAgain();
     } else if (compPunct === 5){
         const result = document.createElement('div');
+        result.style.marginBottom = '10px';
         result.textContent = 'You have lost 😥😥';
         playSpace.appendChild(result);
 

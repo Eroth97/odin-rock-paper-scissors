@@ -1,14 +1,22 @@
+body{
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #bbe9db;
+}
+
 div{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
-    /* border: 2px solid red; */
 }
 
 .play-space{
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .buttons{
