@@ -30,6 +30,7 @@ results.style.flexDirection = 'column';
 playSpace.appendChild(results);
 
 const endResult = document.createElement('div');
+endResult.style.marginTop = '4px';
 endResult.style.marginBottom = '10px';
 endResult.style.flexDirection = 'column';
 endResult.style.gap = '4px';
@@ -154,6 +155,7 @@ function deactivateButtons(){
 //This function creates the try again button and its functionality.
 function tryAgain(){
     const rechargeButton = document.createElement('button');
+    rechargeButton.classList.add('rt-button');
     rechargeButton.textContent = 'Try Again';
     endResult.appendChild(rechargeButton);
 

@@ -23,6 +23,16 @@ div{
     list-style: none;
     display: flex;
     padding-left: 0;
+    gap: 4px;
+}
+
+.button-d{
+    padding: 4px;
+    background-color: #a7bcb9;
+}
+
+.button-d, .rt-button{
+    border-radius: 8px;
 }
 
 .title, footer{
@@ -54,4 +64,10 @@ a{
 .px-32{
     height: 32px;
     width: 32px;
+}
+
+.rt-button{
+    background-color: #24527a;
+    color: #e0ebeb;
+    padding: 8px;
 }
